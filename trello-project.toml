@@ -1,0 +1,22 @@
+# Trello Project Configuration for XRay
+# This indexes cards from the XRay development board
+
+name = "XRay"
+description = "Browser automation MCP server"
+
+# Vector Database Configuration
+[vectordb]
+engine = "sqlite"
+path = ".trello-vectors.db"
+distance = "cosine"
+
+# Embedding Configuration
+[embedding]
+provider = "fastembed"
+model = "bge-small-en-v1.5-q"
+show_download_progress = true
+
+[[boards]]
+id = "694cba08cfd96474f793c13b"
+name = "XRay"
+description = "MCP server for browser automation with interactive toolbar and panels"
