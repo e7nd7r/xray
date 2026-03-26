@@ -1,0 +1,12 @@
+/* Element Selection Styles */
+
+.xray-hover-highlight {
+  outline: 2px solid #3b82f6 !important;
+  outline-offset: 2px !important;
+  cursor: crosshair !important;
+}
+
+.xray-selected {
+  outline: 3px solid #22c55e !important;
+  outline-offset: 2px !important;
+}

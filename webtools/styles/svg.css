@@ -1,0 +1,52 @@
+/* SVG Drawing and Annotation Styles */
+
+#xray-svg-document,
+#xray-svg-fixed {
+  overflow: visible;
+}
+
+/* Stroke elements */
+.xray-stroke {
+  cursor: default;
+}
+
+/* Annotation elements */
+.xray-annotation {
+  cursor: default;
+}
+
+/* Selection highlight for both strokes and annotations */
+.xray-selected {
+  filter: drop-shadow(0 0 3px #3b82f6) drop-shadow(0 0 6px #3b82f6);
+}
+
+/* Selection mode cursor */
+#xray-svg-document .xray-stroke:hover,
+#xray-svg-fixed .xray-stroke:hover,
+#xray-svg-document .xray-annotation:hover,
+#xray-svg-fixed .xray-annotation:hover {
+  cursor: move;
+}
+
+/* Annotation delete button hover */
+.xray-annotation-delete:hover circle {
+  fill: #64748b;
+}
+
+/* Text input/textarea for annotation editing */
+.xray-text-input {
+  position: fixed;
+  font-family: system-ui, -apple-system, sans-serif;
+  z-index: 1000000;
+  box-sizing: border-box;
+}
+
+.xray-text-input::placeholder {
+  color: #94a3b8;
+}
+
+/* foreignObject text content */
+.xray-annotation foreignObject div {
+  margin: 0;
+  padding: 0;
+}

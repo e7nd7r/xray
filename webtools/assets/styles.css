@@ -1,0 +1,95 @@
+/* XRay Toolbar Styles */
+
+#xray-toolbar {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #1a1a2e;
+    color: white;
+    padding: 16px 20px;
+    border-radius: 12px;
+    font-family: system-ui, -apple-system, sans-serif;
+    font-size: 14px;
+    z-index: 999999;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    min-width: 280px;
+}
+
+#xray-toolbar .title {
+    font-weight: 600;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+#xray-toolbar .pulse {
+    width: 8px;
+    height: 8px;
+    background: #4ade80;
+    border-radius: 50%;
+    animation: xray-pulse 1.5s ease-in-out infinite;
+}
+
+#xray-toolbar .prompt {
+    color: #a0a0a0;
+    margin-bottom: 12px;
+}
+
+#xray-toolbar .hint {
+    font-size: 12px;
+    color: #666;
+}
+
+#xray-toolbar .buttons {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+#xray-toolbar button {
+    background: #333;
+    color: #888;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+#xray-toolbar button:hover {
+    background: #444;
+    color: #aaa;
+}
+
+#xray-toolbar button.primary {
+    background: #3b82f6;
+    color: white;
+}
+
+#xray-toolbar button.primary:hover {
+    background: #2563eb;
+}
+
+#xray-toolbar button.primary:disabled {
+    background: #1e40af;
+    color: #6b7280;
+    cursor: not-allowed;
+}
+
+@keyframes xray-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+}
+
+/* Element highlighting */
+.xray-hover-highlight {
+    outline: 2px solid #3b82f6 !important;
+    outline-offset: 2px !important;
+    cursor: crosshair !important;
+}
+
+.xray-selected {
+    outline: 3px solid #22c55e !important;
+    outline-offset: 2px !important;
+}

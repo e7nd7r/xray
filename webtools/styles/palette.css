@@ -1,0 +1,933 @@
+/* Color Palette Panel Styles */
+/* Part of DES-004: Color Palette Panel */
+
+#panel-palette {
+  width: 400px;
+}
+
+/* Section styling */
+.palette-section {
+  margin-bottom: 18px;
+}
+
+.palette-section-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  color: #888;
+  margin-bottom: 12px;
+  letter-spacing: 0.5px;
+}
+
+/* Color strips container */
+.palette-strips {
+  display: flex;
+  gap: 0;
+  overflow-x: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #444 transparent;
+  border-radius: 10px;
+}
+
+.palette-strips::-webkit-scrollbar {
+  height: 4px;
+}
+
+.palette-strips::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.palette-strips::-webkit-scrollbar-thumb {
+  background: #444;
+  border-radius: 2px;
+}
+
+/* Individual color strip */
+.palette-color-strip {
+  flex: 1;
+  min-width: 82px;
+  height: 240px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+  transition: min-width 0.15s;
+}
+
+.palette-color-strip:hover {
+  min-width: 90px;
+}
+
+.palette-color-strip.first {
+  border-radius: 10px 0 0 10px;
+}
+
+.palette-color-strip.last {
+  /* No right rounding - connects with Add strip */
+  border-radius: 0;
+}
+
+/* Insert zone - overlays edges of adjacent strips */
+.palette-insert-zone {
+  width: 24px;
+  height: 240px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  position: relative;
+  margin-left: -12px;
+  margin-right: -12px;
+  z-index: 10;
+  flex-shrink: 0;
+}
+
+.palette-insert-btn {
+  width: 24px;
+  height: 24px;
+  background: rgba(74, 158, 255, 0.9);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  opacity: 0;
+  transform: scale(0.5);
+  transition: opacity 0.15s, transform 0.15s;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.palette-insert-zone:hover .palette-insert-btn {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.palette-insert-btn:hover {
+  background: #3a8eef;
+}
+
+.palette-color-strip.first.last {
+  /* Single strip - left rounding only, connects to Add strip on right */
+  border-radius: 10px 0 0 10px;
+}
+
+/* Controls - NO background, contrasting color, TIGHT spacing */
+.palette-strip-controls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 6px;
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 0.15s, transform 0.15s;
+}
+
+.palette-color-strip:hover .palette-strip-controls {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Light text for dark backgrounds */
+.palette-strip-controls.light {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.palette-strip-controls.light .palette-icon-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+
+.palette-strip-controls.light .palette-hex-code,
+.palette-strip-controls.light .palette-color-name {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+/* Dark text for light backgrounds */
+.palette-strip-controls.dark {
+  color: rgba(0, 0, 0, 0.7);
+}
+
+.palette-strip-controls.dark .palette-icon-btn:hover {
+  background: rgba(0, 0, 0, 0.15);
+  color: rgba(0, 0, 0, 0.9);
+}
+
+.palette-strip-controls.dark .palette-hex-code,
+.palette-strip-controls.dark .palette-color-name {
+  color: rgba(0, 0, 0, 0.65);
+}
+
+/* Icon buttons */
+.palette-icon-btn {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.1s;
+}
+
+.palette-icon-btn.drag {
+  cursor: grab;
+}
+
+.palette-icon-btn.drag:active {
+  cursor: grabbing;
+}
+
+/* Color info */
+.palette-color-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2px;
+}
+
+.palette-hex-code {
+  font-size: 10px;
+  font-family: monospace;
+}
+
+.palette-color-name {
+  font-size: 9px;
+  margin-top: 1px;
+  text-transform: capitalize;
+}
+
+.palette-color-role {
+  font-size: 9px;
+  margin-top: 2px;
+  padding: 2px 6px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background 0.1s;
+}
+
+.palette-color-role:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.palette-strip-controls.dark .palette-color-role {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.palette-strip-controls.dark .palette-color-role:hover {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+/* Add strip button */
+.palette-add-strip {
+  min-width: 56px;
+  height: 240px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #252542;
+  border: 2px dashed #444;
+  border-radius: 0 10px 10px 0;
+  cursor: pointer;
+  transition: all 0.15s;
+  flex-shrink: 0;
+}
+
+.palette-add-strip:hover {
+  border-color: #666;
+  background: #2a2a4a;
+}
+
+.palette-add-strip span {
+  font-size: 28px;
+  color: #666;
+}
+
+.palette-add-strip small {
+  font-size: 11px;
+  color: #666;
+  margin-top: 4px;
+}
+
+/* When no colors, add-strip should have full rounded corners */
+.palette-strips > .palette-add-strip:first-child {
+  border-radius: 10px;
+}
+
+/* Generation mode toggle */
+.palette-mode-toggle {
+  display: flex;
+  position: relative;
+  background: #252542;
+  border-radius: 6px;
+  padding: 4px;
+  margin-bottom: 14px;
+  cursor: pointer;
+}
+
+.palette-toggle-label {
+  flex: 1;
+  padding: 8px 14px;
+  text-align: center;
+  font-size: 13px;
+  color: #888;
+  position: relative;
+  z-index: 1;
+  transition: color 0.2s;
+}
+
+.palette-toggle-label.active {
+  color: #fff;
+}
+
+.palette-toggle-slider {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: calc(50% - 4px);
+  height: calc(100% - 8px);
+  background: #4a9eff;
+  border-radius: 4px;
+  transition: transform 0.2s ease;
+}
+
+.palette-toggle-slider.right {
+  transform: translateX(100%);
+}
+
+/* Mode options */
+.palette-mode-options {
+  display: none;
+}
+
+.palette-mode-options.active {
+  display: block;
+}
+
+/* Algorithm select */
+.palette-algorithm-select {
+  width: 100%;
+  padding: 10px 14px;
+  background: #252542;
+  border: 1px solid #333;
+  border-radius: 6px;
+  color: #fff;
+  font-size: 13px;
+  cursor: pointer;
+  margin-bottom: 14px;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+}
+
+.palette-algorithm-select:focus {
+  outline: none;
+  border-color: #4a9eff;
+}
+
+/* AI mode note */
+.palette-ai-note {
+  padding: 12px;
+  background: #252542;
+  border-radius: 6px;
+  font-size: 12px;
+  color: #aaa;
+  line-height: 1.4;
+  margin-bottom: 14px;
+}
+
+.palette-ai-note strong {
+  color: #fff;
+  display: block;
+  margin-bottom: 6px;
+}
+
+/* Generate button */
+.palette-generate-btn {
+  width: 100%;
+  padding: 12px;
+  background: #4a9eff;
+  border: none;
+  border-radius: 6px;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.palette-generate-btn:hover:not(:disabled) {
+  background: #3a8eef;
+}
+
+.palette-generate-btn:disabled {
+  background: #333;
+  color: #666;
+  cursor: not-allowed;
+}
+
+/* Hint text */
+.palette-hint {
+  display: block;
+  font-size: 11px;
+  color: #666;
+  margin-top: 8px;
+  text-align: center;
+}
+
+/* Role dropdown */
+.palette-role-dropdown {
+  background: #1a1a2e;
+  border: 1px solid #333;
+  border-radius: 6px;
+  padding: 4px;
+  min-width: 120px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.palette-role-option {
+  padding: 5px 10px;
+  font-size: 12px;
+  color: #ccc;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background 0.1s;
+}
+
+.palette-role-option:hover {
+  background: #252542;
+  color: #fff;
+}
+
+.palette-role-custom {
+  border-top: 1px solid #333;
+  margin-top: 4px;
+  padding-top: 4px;
+}
+
+.palette-role-input {
+  width: 100%;
+  padding: 5px 10px;
+  background: #252542;
+  border: 1px solid #333;
+  border-radius: 4px;
+  color: #fff;
+  font-size: 12px;
+  outline: none;
+}
+
+.palette-role-input:focus {
+  border-color: #4a9eff;
+}
+
+.palette-role-input::placeholder {
+  color: #666;
+}
+
+/* Drag and drop */
+.palette-color-strip.dragging {
+  opacity: 0.5;
+}
+
+.palette-color-strip.drag-over-left {
+  box-shadow: inset 4px 0 0 #4a9eff;
+}
+
+.palette-color-strip.drag-over-right {
+  box-shadow: inset -4px 0 0 #4a9eff;
+}
+
+/* Section header with toggle */
+.palette-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.palette-section-header .palette-section-label {
+  margin-bottom: 0;
+}
+
+/* View toggle (palette/visualizer switch) */
+.palette-view-toggle {
+  display: flex;
+  background: #252542;
+  border: 1px solid #333;
+  border-radius: 14px;
+  padding: 2px;
+  cursor: pointer;
+}
+
+.palette-view-option {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 12px;
+  color: #666;
+  transition: all 0.15s;
+}
+
+.palette-view-option:hover:not(.active) {
+  color: #999;
+}
+
+.palette-view-option.active {
+  background: #4a9eff;
+  color: #fff;
+}
+
+/* Visualizer container */
+.palette-visualizer-container {
+  height: 240px;
+  background: #252542;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+/* Visualizer component */
+.visualizer {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.visualizer-header {
+  padding: 8px 12px;
+  background: rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid #333;
+}
+
+.visualizer-title {
+  font-size: 12px;
+  color: #aaa;
+  font-weight: 500;
+}
+
+.visualizer-viewport {
+  flex: 1;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.visualizer-content {
+  width: 100%;
+  height: 100%;
+  padding: 12px;
+  box-sizing: border-box;
+}
+
+/* Navigation buttons - hidden by default, shown on hover */
+.visualizer-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.4);
+  border: none;
+  border-radius: 50%;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.15s;
+  z-index: 10;
+  opacity: 0;
+}
+
+.visualizer-viewport:hover .visualizer-nav {
+  opacity: 1;
+}
+
+.visualizer-nav:hover {
+  background: rgba(0, 0, 0, 0.6);
+}
+
+.visualizer-nav.prev {
+  left: 8px;
+}
+
+.visualizer-nav.next {
+  right: 8px;
+}
+
+/* Slide slider/scrubber */
+.visualizer-indicators {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.visualizer-slider {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+
+.visualizer-slider-track {
+  flex: 1;
+  height: 4px;
+  background: #333;
+  border-radius: 2px;
+  position: relative;
+  cursor: pointer;
+}
+
+.visualizer-slider-track:hover {
+  height: 6px;
+  margin: -1px 0;
+}
+
+.visualizer-slider-fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  background: #4a9eff;
+  border-radius: 2px;
+  pointer-events: none;
+}
+
+.visualizer-slider-handle {
+  position: absolute;
+  top: 50%;
+  width: 12px;
+  height: 12px;
+  background: #fff;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+  cursor: grab;
+  transition: transform 0.1s;
+}
+
+.visualizer-slider-handle:hover {
+  transform: translate(-50%, -50%) scale(1.2);
+}
+
+.visualizer-slider-handle:active {
+  cursor: grabbing;
+  transform: translate(-50%, -50%) scale(1.1);
+}
+
+.visualizer-slider-label {
+  font-size: 10px;
+  color: #888;
+  white-space: nowrap;
+  min-width: 42px;
+  text-align: right;
+}
+
+/* Slide content styles */
+.slide-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  color: #666;
+  font-size: 13px;
+}
+
+.slide-gradient {
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+}
+
+.slide-swatches {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+  height: 100%;
+}
+
+.slide-swatch {
+  flex: 1;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 8px;
+  border-radius: 6px;
+}
+
+.slide-swatch-label {
+  font-size: 10px;
+  color: inherit;
+  background: rgba(0, 0, 0, 0.3);
+  padding: 2px 6px;
+  border-radius: 3px;
+  color: #fff;
+}
+
+/* ============================================================================
+   Color Picker Modal (DES004-13)
+   ============================================================================ */
+
+.color-picker-modal {
+  position: fixed;
+  z-index: 1000002;
+  width: 280px;
+  background: #1a1a2e;
+  border: 1px solid #333;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+}
+
+.color-picker-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background: rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid #333;
+  cursor: grab;
+  user-select: none;
+}
+
+.color-picker-header:active {
+  cursor: grabbing;
+}
+
+.color-picker-title {
+  font-size: 13px;
+  font-weight: 500;
+  color: #fff;
+}
+
+.color-picker-close {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  color: #888;
+  font-size: 20px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.1s;
+}
+
+.color-picker-close:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.color-picker-body {
+  padding: 16px;
+}
+
+/* Wheel container */
+.color-picker-wheel-container {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  margin: 0 auto 16px;
+}
+
+.color-picker-wheel {
+  display: block;
+  border-radius: 50%;
+  cursor: default;
+}
+
+/* Color markers overlay */
+.color-picker-markers {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.color-picker-marker {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  cursor: grab;
+  pointer-events: auto;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+  transition: transform 0.1s, box-shadow 0.1s;
+}
+
+.color-picker-marker:hover {
+  transform: translate(-50%, -50%) scale(1.15);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.color-picker-marker:active {
+  cursor: grabbing;
+}
+
+.color-picker-marker.selected {
+  width: 26px;
+  height: 26px;
+  border-width: 3px;
+  z-index: 10;
+  box-shadow: 0 0 0 3px rgba(74, 158, 255, 0.5), 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+.color-picker-marker.selected:hover {
+  transform: translate(-50%, -50%) scale(1.1);
+}
+
+/* Lightness scrubber */
+.color-picker-lightness {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.color-picker-lightness-label {
+  font-size: 11px;
+  color: #888;
+  min-width: 55px;
+}
+
+.color-picker-lightness-track {
+  flex: 1;
+  height: 12px;
+  position: relative;
+  border-radius: 6px;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.color-picker-lightness-gradient {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to right, #1a1a1a, #888, #fff);
+  border-radius: 6px;
+}
+
+.color-picker-lightness-handle {
+  position: absolute;
+  top: 50%;
+  width: 16px;
+  height: 16px;
+  background: #fff;
+  border: 2px solid #333;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  cursor: grab;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  transition: transform 0.1s;
+}
+
+.color-picker-lightness-handle:hover {
+  transform: translate(-50%, -50%) scale(1.15);
+}
+
+.color-picker-lightness-handle:active {
+  cursor: grabbing;
+}
+
+.color-picker-lightness-value {
+  font-size: 11px;
+  color: #888;
+  min-width: 32px;
+  text-align: right;
+  font-family: monospace;
+}
+
+/* Color info panel */
+.color-picker-info {
+  background: #252542;
+  border-radius: 8px;
+  padding: 12px;
+}
+
+.color-picker-preview {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #333;
+}
+
+.color-picker-swatch {
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+.color-picker-details {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.color-picker-name {
+  font-size: 14px;
+  color: #fff;
+  font-weight: 500;
+}
+
+.color-picker-hex {
+  font-size: 12px;
+  color: #888;
+  font-family: monospace;
+}
+
+.color-picker-psychology {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.color-picker-psychology-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  color: #666;
+  letter-spacing: 0.5px;
+}
+
+.color-picker-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.color-picker-tag {
+  font-size: 11px;
+  color: #ccc;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 4px 10px;
+  border-radius: 12px;
+}
+
+.color-picker-no-selection {
+  color: #666;
+  font-size: 12px;
+  text-align: center;
+  padding: 20px;
+}

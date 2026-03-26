@@ -1,0 +1,8 @@
+/* XRay Toolbar Styles - Main Entry */
+
+@import './panel.css';
+@import './toolbar.css';
+@import './palette.css';
+@import './selection.css';
+@import './svg.css';
+@import '../src/visualizer/slides/styles.css';

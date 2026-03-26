@@ -1,0 +1,131 @@
+/**
+ * Visualizer Slide Styles
+ *
+ * Styles specific to individual visualizer slides.
+ * Part of DES004: Color Palette Panel
+ */
+
+/* ============================================================================
+ * Common Slide Wrapper
+ * ============================================================================ */
+
+.slide-wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ============================================================================
+ * Contrast Grid Slide
+ * ============================================================================ */
+
+.contrast-grid-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: auto;
+}
+
+.contrast-grid {
+  border-collapse: collapse;
+  font-size: 10px;
+}
+
+.contrast-grid th,
+.contrast-grid td {
+  border: 1px solid #333;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.contrast-cell {
+  width: 40px;
+  height: 32px;
+  font-weight: 500;
+}
+
+.contrast-self {
+  background: #1a1a2e;
+  color: #444;
+}
+
+.contrast-aaa {
+  background: #1a4d1a;
+  color: #4ade80;
+}
+
+.contrast-aa {
+  background: #2d4a1a;
+  color: #a3e635;
+}
+
+.contrast-aalg {
+  background: #4a3d1a;
+  color: #fbbf24;
+}
+
+.contrast-fail {
+  background: #4a1a1a;
+  color: #f87171;
+}
+
+/* ============================================================================
+ * Data Table Slide
+ * ============================================================================ */
+
+.dataviz-table-container {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+.dataviz-table {
+  border-collapse: collapse;
+  font-size: 11px;
+  margin: 0 auto;
+}
+
+.dataviz-table th,
+.dataviz-table td {
+  border: 1px solid #333;
+  padding: 6px 8px;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.dataviz-table th {
+  background: #1a1a2e;
+  color: #888;
+  font-weight: 500;
+  text-transform: uppercase;
+  font-size: 9px;
+  letter-spacing: 0.5px;
+}
+
+.dataviz-table td {
+  background: #252542;
+  color: #ccc;
+}
+
+.dataviz-table tr:hover td {
+  background: #2a2a4a;
+}
+
+.dataviz-color-swatch {
+  display: inline-block;
+  padding: 3px 8px;
+  border-radius: 3px;
+  font-size: 10px;
+  min-width: 50px;
+}
+
+.dataviz-mono {
+  font-family: monospace;
+  font-size: 10px;
+}

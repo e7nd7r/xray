@@ -1,0 +1,491 @@
+/* Unified Toolbar Panel Styles */
+
+#panel-tools {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: #1a1a2e;
+  color: white;
+  border-radius: 12px;
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 14px;
+  z-index: 999999;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+  min-width: 260px;
+  max-width: 300px;
+  user-select: none;
+}
+
+/* Minimized state - compact square */
+#panel-tools.minimized {
+  min-width: auto;
+  max-width: none;
+  border-radius: 8px;
+}
+
+#panel-tools.minimized .toolbar-body {
+  display: none;
+}
+
+#panel-tools.minimized .toolbar-header {
+  border-bottom: none;
+  padding: 6px 8px;
+  border-radius: 8px;
+  gap: 6px;
+}
+
+#panel-tools.minimized .header-left {
+  gap: 4px;
+}
+
+#panel-tools.minimized .drag-indicator {
+  display: none;
+}
+
+#panel-tools.minimized .title {
+  font-size: 11px;
+}
+
+#panel-tools.minimized .pulse {
+  width: 6px;
+  height: 6px;
+}
+
+/* Header - draggable */
+.toolbar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px 12px 0 0;
+}
+
+#panel-tools.minimized .toolbar-header {
+  border-radius: 12px;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+}
+
+.drag-indicator {
+  color: #666;
+  font-size: 12px;
+  letter-spacing: 2px;
+}
+
+#panel-tools .title {
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+}
+
+#panel-tools .pulse {
+  width: 8px;
+  height: 8px;
+  background: #4ade80;
+  border-radius: 50%;
+  animation: xray-pulse 1.5s ease-in-out infinite;
+}
+
+.minimize-btn {
+  width: 14px;
+  height: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  border-radius: 3px;
+  color: #555;
+  cursor: pointer;
+  font-size: 12px;
+  line-height: 1;
+  padding: 0;
+  flex-shrink: 0;
+}
+
+.minimize-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #999;
+}
+
+/* Body */
+.toolbar-body {
+  padding: 12px 16px 16px;
+}
+
+.toolbar-prompt {
+  color: #a0a0a0;
+  font-size: 12px;
+  margin-bottom: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Sections */
+.toolbar-section {
+  margin-bottom: 12px;
+}
+
+.section-label {
+  font-size: 11px;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Tool Row */
+.tool-row {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.tool-btn {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  color: #888;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.15s;
+}
+
+.tool-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ccc;
+}
+
+.tool-btn.active {
+  background: #3b82f6;
+  border-color: #3b82f6;
+  color: white;
+}
+
+/* Custom tooltips */
+.tool-btn[data-tooltip] {
+  position: relative;
+}
+
+.tool-btn[data-tooltip]::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 6px 10px;
+  background: #1a1a2e;
+  color: #fff;
+  font-size: 11px;
+  white-space: nowrap;
+  border-radius: 4px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.15s, visibility 0.15s;
+  pointer-events: none;
+  z-index: 1000;
+  margin-bottom: 6px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+.tool-btn[data-tooltip]:hover::after {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Color Row */
+.color-row {
+  display: flex;
+  gap: 4px;
+  margin-bottom: 6px;
+}
+
+.color-btn {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.color-btn:hover {
+  transform: scale(1.1);
+}
+
+.color-btn.active {
+  border-color: white;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.3);
+}
+
+/* Stroke Width Row */
+.stroke-row {
+  display: flex;
+  gap: 4px;
+}
+
+.stroke-btn {
+  width: 32px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.stroke-btn span {
+  width: 16px;
+  background: #888;
+  border-radius: 2px;
+}
+
+.stroke-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.stroke-btn:hover span {
+  background: #ccc;
+}
+
+.stroke-btn.active {
+  background: #3b82f6;
+  border-color: #3b82f6;
+}
+
+.stroke-btn.active span {
+  background: white;
+}
+
+/* Clear Button */
+.clear-btn {
+  width: 100%;
+  padding: 8px;
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: 6px;
+  color: #ef4444;
+  cursor: pointer;
+  font-size: 12px;
+  transition: all 0.15s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.clear-btn:hover {
+  background: rgba(239, 68, 68, 0.2);
+}
+
+/* Snapshots Section */
+.snapshots-section {
+  background: rgba(255, 255, 255, 0.03);
+  margin: 0 -16px;
+  padding: 12px 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.snapshot-count {
+  color: #888;
+}
+
+.clear-all-btn {
+  font-size: 10px;
+  padding: 2px 6px;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  color: #888;
+  cursor: pointer;
+}
+
+.clear-all-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #ccc;
+}
+
+.snapshot-list {
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.snapshot-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 8px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+  margin-top: 4px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background 0.1s;
+}
+
+.snapshot-item:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.snapshot-thumb-container {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.snapshot-thumbnail {
+  width: 48px;
+  height: 36px;
+  object-fit: cover;
+  border-radius: 3px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: block;
+}
+
+/* Large preview tooltip on hover */
+.snapshot-preview {
+  display: none;
+  position: fixed;
+  z-index: 1000001;
+  padding: 4px;
+  background: #1a1a2e;
+  border-radius: 6px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  pointer-events: none;
+}
+
+.snapshot-preview.visible {
+  display: block;
+}
+
+.snapshot-preview img {
+  width: 280px;
+  height: auto;
+  border-radius: 4px;
+  display: block;
+}
+
+.snapshot-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.snapshot-name {
+  color: #ccc;
+  font-weight: 500;
+}
+
+.snapshot-time {
+  color: #666;
+  font-size: 10px;
+}
+
+.snapshot-delete {
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  color: #666;
+  cursor: pointer;
+  font-size: 14px;
+  border-radius: 4px;
+}
+
+.snapshot-delete:hover {
+  background: rgba(239, 68, 68, 0.2);
+  color: #ef4444;
+}
+
+/* Footer - hidden by default, shown when waiting */
+.toolbar-footer {
+  display: none;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+#panel-tools.waiting .toolbar-footer {
+  display: flex;
+}
+
+/* Waiting indicator */
+.waiting-indicator {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 0;
+}
+
+.waiting-pulse {
+  width: 8px;
+  height: 8px;
+  background: #f59e0b;
+  border-radius: 50%;
+  animation: xray-pulse 1s ease-in-out infinite;
+}
+
+.waiting-text {
+  color: #f59e0b;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+#xray-submit {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  background: #3b82f6;
+  border: none;
+  color: white;
+  transition: all 0.15s;
+}
+
+#xray-submit:hover {
+  background: #2563eb;
+}
+
+/* Pulse Animation */
+@keyframes xray-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
+}

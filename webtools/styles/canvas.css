@@ -1,0 +1,14 @@
+/* Canvas Overlay Styles */
+
+#xray-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 999997;
+  pointer-events: none;
+  cursor: crosshair;
+}
+
+#xray-canvas.active {
+  pointer-events: auto;
+}
